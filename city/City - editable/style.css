@@ -1,0 +1,385 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+#city {
+  width: 1905px;
+  height: 520px;
+  background: linear-gradient(to bottom, #1e090b 0%, #f0f0f0 100%);
+  position: relative;
+  overflow: hidden;
+}
+.building {
+  position: absolute;
+  bottom: 60px;
+  background: #333;
+  border: 1px solid #555;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.window {
+  width: 5px;
+  height: 5px;
+  margin: 2px;
+  background-color: yellow;
+}
+.road {
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  background: #444;
+}
+#city {
+  width: 1905px;
+  height: 530px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Buildings are already above the walkway */
+.building {
+  position: absolute;
+  bottom: 90px; /* leave room for walkway + road */
+  background: #333;
+  border: 1px solid #555;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+/* Walkway between road and buildings */
+.walkway {
+  position: absolute;
+  bottom: 70px;
+  height: 20px;
+  width: 100%;
+  background: #0f0e0e;
+  z-index: 99;
+}
+
+/* Road (main) */
+.road {
+  position: absolute;
+  bottom: 0;
+  height: 70px;
+  width: 100%;
+  background: #444;
+  z-index: 100;
+}
+
+/* Side roads (left and right) */
+.side-road {
+  position: absolute;
+  bottom: 0;
+  width: 100px;
+  height: 100%;
+  background: #555;
+  z-index:99;
+}
+
+.side-road.left {
+  left: 0;
+}
+
+.side-road.right {
+  right: 0;
+}
+
+.streetlight {
+  position: absolute;
+  bottom: 100px;
+  width: 5px;
+  height: 50px;
+  background: #222;
+  z-index: 80;
+}
+.light {
+  width: 8px;
+  height: 12px;
+  border-radius: 50%;
+  background: yellow;
+  margin-left: -2.5px;
+}
+
+/* People stay on the walkway */
+.person {
+  position: absolute;
+  width: 4px;
+  height: 12px;
+  /* background: black; */
+  z-index: 102;
+}
+
+/* .person {
+  position: absolute;
+  bottom: 0;
+  z-index: 60;
+  width: 20px;
+  height: auto;
+} */
+
+/* Digital Signage on Roadway
+.digital-signage {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) perspective(165px) rotateY(55deg);
+  transform-origin: left center;
+  bottom: 0;
+  width: 30px;
+  height: 40px;
+  background: #222;
+  border: 2px solid #0ff;
+  border-radius: 4px 4px 2px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0ff;
+  font-size: 10px;
+  font-family: Arial, sans-serif;
+  z-index: 2;
+  box-shadow: 0 0 8px #0ff, 0 2px 8px #0008;
+} */
+
+.digital-signage-base {
+  position: absolute;
+  left: -16px;
+  bottom: -7px;
+  width: 16px;
+  height: 8px;
+  background: #444;
+  border-radius: 0 0 4px 4px;
+  z-index: 90;
+  box-shadow: 0 2px 4px #0006;
+  transform: perspective(165px) rotateY(55deg);
+}
+
+.digital-signage {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) perspective(165px) rotateY(55deg);
+  transform-origin: left center;
+  bottom: 0;
+  width: 30px;
+  height: 40px;
+  background: #222; /* Keep as is for dark base */
+  border: 2px solid #0ff; /* This can be dynamic later if needed */
+  border-radius: 4px 4px 2px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(234, 240, 240);
+  font-size: 10px;
+  font-family: Arial, sans-serif;
+  z-index: 90;
+  box-shadow: 0 0 8px #0ff, 0 2px 8px #0008;
+
+  /* ✨ Add these new lines: */
+  transition: color 0.5s, box-shadow 0.5s;
+}
+
+.digital-signage::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 15px;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* background: #0ff; default glow color */
+  opacity: 0.6;
+  filter: blur(6px);
+  border-radius: 50%;
+  z-index: 90;
+  pointer-events: none;
+  /* background: var(--glow-color, #0ff); */
+}
+
+
+
+
+.median {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  bottom: 35px; /* Centered in 70px road */
+  background: repeating-linear-gradient(
+    to right,
+    #ff0 0 20px,
+    transparent 20px 40px
+  );
+  z-index: 50;
+  opacity: 0.8;
+}
+
+/* .vehicle {
+  box-shadow: 0 2px 6px #0004;
+  z-index: 140;
+}
+.vehicle-left,
+.vehicle-right,
+[class^="vehicle-ltr-"],
+[class^="vehicle-rtl-"] {
+  opacity: 1 !important;
+  animation: none !important;
+  transition: none !important;
+} */
+.vehicle {
+  position: absolute;
+  box-shadow: 0 2px 6px #0004;
+  z-index: 140;
+  opacity: 1;
+  animation: none;
+  transition: none;
+  pointer-events: none; /* optional: disables hover issues */
+}
+
+.vehicle img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+[class^="vehicle-ltr-"],
+[class^="vehicle-rtl-"] {
+  opacity: 1;
+  animation: none;
+  transition: none;
+}
+
+
+
+.buildingwindows {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.wall-stone {
+  z-index: 50;
+  box-shadow: inset 0 1px 2px #0003;
+}
+/* .pavement-stone {
+  z-index: 50;
+  box-shadow: inset 0 1px 2px #0003;
+  transform: skewX(-25deg) scaleY(0.8);
+  transform-origin: bottom left;
+} */
+.pavement-stone {
+  z-index: 50;
+  box-shadow: inset 0 1px 2px rgba(201, 7, 7, 0.2);
+  transform: skewX(-75deg) scaleY(0.8);
+  transform-origin: bottom left;
+  border: 0.5px solid #877f7f;
+}
+
+.building-door {
+  z-index: 10;
+  box-shadow: inset 0 2px 4px #0006;
+}
+
+.streetlight-reflection {
+  opacity: 0.6;
+  filter: blur(1px);
+}
+/* ⭐ Night stars */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite ease-in-out;
+  z-index: 2;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* 🌥️ Cloud Animation */
+@keyframes floatClouds {
+  0% {
+    transform: translateX(var(--start-x)) translateY(0px);
+    opacity: 0;   /* start invisible */
+  }
+  10% {
+    opacity: 1;   /* fade in quickly */
+  }
+  50% {
+    transform: translateX(calc((var(--start-x) + var(--end-x)) / 2)) translateY(10px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(var(--end-x)) translateY(0px);
+    opacity: 0.4;
+  }
+}
+
+
+
+.cloud {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  opacity: 1;
+  animation-name: floatClouds;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  will-change: transform, opacity;
+  z-index: 2; /* updated */
+}
+
+/* 🐦 Bird Animation */
+@keyframes flyBirds {
+  0% {
+    transform: translateX(var(--start-x)) translateY(0px) scale(var(--scale)) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(calc(var(--start-x) + (var(--end-x) - var(--start-x)) * 0.25)) translateY(-10px) scale(calc(var(--scale) * 1.05)) rotate(2deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateX(var(--mid-x)) translateY(-20px) scale(var(--scale)) rotate(0deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateX(calc(var(--start-x) + (var(--end-x) - var(--start-x)) * 0.75)) translateY(-10px) scale(calc(var(--scale) * 0.95)) rotate(-2deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(var(--end-x)) translateY(0px) scale(var(--scale)) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+
+.bird {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  animation-name: flyBirds;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  will-change: transform, opacity;
+  z-index: 4; /* updated */
+}
+
+.bird img {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+
+
+
